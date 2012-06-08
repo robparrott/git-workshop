@@ -1,4 +1,4 @@
-#toc {
+#left {
 	float: left;
 	border-right: thin solid black;
 	width: 300px;
@@ -6,10 +6,10 @@
 	top: 0;
 	left: 0;
 	height: 100%;
-
+	padding: 5px;
 }
 
-#title, #content {
+#content {
 	margin-left: 300px;
 	padding-left: 10px;
 }

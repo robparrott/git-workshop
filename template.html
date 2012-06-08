@@ -12,9 +12,18 @@
     <link rel="stylesheet" href="css/workshop-print.css" media="print"></link>
 	</head>
 	<body>
-    {{ toc }}
 
+    <div id="left">
     <h1 id="title">{{ title }}</h1>
+
+    <p>
+    <a href="http://ac.seas.harvard.edu/">Academic Computing</a><br/>
+    School of Engineering and Applied Sciences</br>
+    Harvard University
+    </p>
+
+    {{ toc }}
+  </div>
 
     <div id="content">
     {{ content }}
