@@ -6,12 +6,12 @@ TEMPLATE = template.html
 all: gitworkshop-styled.html
 
 gitworkshop-styled.html: gitworkshop.html toc.html template.html
-	apply-template -v content=@$< \
+	bin/apply-template -v content=@$< \
 		-v toc=@toc.html \
 		-v title="Git Workshop" $(TEMPLATE) > $@ || rm -f $@
 
 toc.html: gitworkshop.html
-	python gentoc.py -m1 < $< > $@ || rm -f $@
+	bin/gentoc -m1 < $< > $@ || rm -f $@
 
 clean:
 	rm -f gitworkshop.html gitworkshop-styled.html
