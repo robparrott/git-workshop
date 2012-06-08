@@ -1,0 +1,35 @@
+#!/usr/bin/python
+
+import os
+import sys
+import argparse
+
+from jinja2 import Template
+
+class VarAction (argparse.Action):
+    def __call__ (self, parser, namespace, values, option_string=None):
+        var, val = values.split('=')
+        if val.startswith('@'):
+            val = open(val[1:]).read()
+
+        if namespace.var is None:
+            namespace.var = {}
+
+        namespace.var[var] = val
+
+def parse_args ():
+    p = argparse.ArgumentParser()
+    p.add_argument('-v', '--var', action=VarAction)
+    p.add_argument('template')
+    p.add_argument('input', nargs='?')
+    return p.parse_args()
+
+def main():
+    opts = parse_args()
+    
+    template = Template(open(opts.template).read())
+    print template.render(**opts.var)
+
+if __name__ == '__main__':
+    main()
+

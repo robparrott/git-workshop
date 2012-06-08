@@ -1,0 +1,16 @@
+#toc {
+	float: left;
+	border-right: thin solid black;
+	width: 300px;
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 100%;
+
+}
+
+#title, #content {
+	margin-left: 300px;
+	padding-left: 10px;
+}
+
