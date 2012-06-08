@@ -39,7 +39,7 @@ Linux and OS X.
 ## Initial configuration
 
 Git will look for configuration information inside the per-repository
-`.git/config` file and in `$HOME/.gitconfig`.  The `git config`
+`.git/config` file and in the global `$HOME/.gitconfig`.  The `git config`
 command modifies these configuration files, although you can also edit
 them with your favorite text editor.  They are standard INI-style
 configuration files:
@@ -52,7 +52,8 @@ configuration files:
             name = Lars Kellogg-Stedman
             email = lars@seas.harvard.edu
 
-Git provides a simple way of editing this file:
+Git provides a simple way to open your global configuration file in an
+editor:
 
     $ git config --global --edit
           
