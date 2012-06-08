@@ -1,6 +1,6 @@
-# Installing git
+## Installing git
 
-## For Linux
+### For Linux
 
 Git is probably available from your distribution.  If you are using
 RHEL or CentOS, try:
@@ -11,7 +11,7 @@ If you are using Ubuntu or Debian, try:
 
     $ sudo yum install git-core
 
-## For OS X
+### For OS X
 
 The [git website][] provides an [installer for OS X][osx installer],
 but you will probably be better off installing [MacPorts][], a
@@ -23,7 +23,7 @@ collection of open source software for OS X, and then running:
 [osx installer]: http://git-scm.com/download/mac
 [macports]: http://macports.org
 
-## For Windows
+### For Windows
 
 Download and install [msysgit][], which will provide you with:
 
@@ -36,7 +36,7 @@ Linux and OS X.
 
 [msysgit]: http://code.google.com/p/msysgit/
 
-# Initial configuration
+## Initial configuration
 
 Git will look for configuration information inside the per-repository
 `.git/config` file and in `$HOME/.gitconfig`.  The `git config`
@@ -56,7 +56,7 @@ Git provides a simple way of editing this file:
 
     $ git config --global --edit
           
-## Name and email
+### Name and email
 
 Git needs to know who you are in order to correctly attribute your
 changes.  You can configure your username and email address globally
@@ -65,7 +65,7 @@ like this:
     $ git config --global user.name "Lars Kellogg-Stedman"
     $ git config --global user.email "lars@seas.harvard.edu"
 
-## Editor
+### Editor
 
 For operations that require you to provide messages (such as commits
 and tags), git will look in the following places to figure out which
@@ -80,7 +80,7 @@ The `VISUAL` and `EDITOR` environment variables are traditionally used
 by a variety of Unix tools to select your editor, so you may already
 have these set to something sensible.
 
-## Colors
+### Colors
 
 Many git commands can produce colorized output.  Set `color.ui` to
 `auto` to have git produce colorized output when writing to a
@@ -88,7 +88,7 @@ terminal:
 
     $ git config --global color.ui auto
 
-## Aliases
+### Aliases
 
 Git allows you to configure aliases for commonly used commands and
 options.   As you use git you may find yourself frequently typing in
@@ -102,7 +102,7 @@ Start with these:
 
 Otherwise you will go insane during the rest of this workshop.
 
-# Creating a repository
+## Creating a repository
 
 A *repository* is what contains the change history for your project.
 
@@ -110,13 +110,14 @@ When interacting with git, you will typically have a set of
 files called your *working directory*, inside which is a directory
 called `.git` which is the actual *repository*.
 
-## From an existing directory
+### From an existing directory
 
 Run `git init` to create a git repository inside an existing
 directory:
 
     $ cd myproject
     $ git init
+    Initialized empty Git repository in /home/lars/myproject/.git/
 
 If you have a collection of files you would like to manage
 using `git`, the process will look something like this:
@@ -129,7 +130,7 @@ using `git`, the process will look something like this:
 
 We'll talk about these commands in more detail later on.
 
-## From scratch
+### From scratch
 
 With recent versions of git you can simply type:
 
@@ -144,12 +145,12 @@ necessary to create the directory first:
     $ cd myproject
     $ git init
 
-## From a remote repository
+### From a remote repository
 
 Another way to create a git repository is to copy -- or *clone* it --
 from somewhere else using the `git clone` command.  For example:
 
-    $ git clone git://code.seas.harvard.edu/seas-academic-computing/sample1.git
+    $ git clone git://code.seas.harvard.edu/git-workshop/sample1.git
 
 Which should result in output along the lines of:
 
@@ -162,9 +163,9 @@ Which should result in output along the lines of:
 After the `clone` operation completes, you will have a directory
 called `sample1` inside your current directory.
 
-# What's changed?
+## What's changed?
 
-## git status
+### git status
 
 The `git status` command displays information about the state of files
 in your working directory. If you were to run it inside the `sample1`
@@ -192,7 +193,7 @@ The output shows that there is a new file in our working directory
 that git knows nothing about ("untracked").  We will look at how to
 add this file to the repository in the next section.
 
-## git diff
+### git diff
 
 The `diff` command shows the changes between different versions of
 your files.  Without any additional parameters, it will show the
@@ -228,37 +229,90 @@ And re-run `git diff`:
 The output of `git diff` shows where we have added or removed (or
 modified) lines.
 
-## git blame
+### git blame
 
-# Staging changes
+The `blame` command shows who is responsible for each line in a file.
+For example, running `git blame` on the file `hello.py` yields:
 
-    git add newfile.txt
+    $ git blame hello.py
+    ^af1bee6 (Lars Kellogg-Stedman 2012-06-08 12:42:06 -0400 1) #!/usr/bin/python
+    ^af1bee6 (Lars Kellogg-Stedman 2012-06-08 12:42:06 -0400 2) 
+    59e1d7d0 (Lars Kellogg-Stedman 2012-06-08 12:42:47 -0400 3) import os
+    59e1d7d0 (Lars Kellogg-Stedman 2012-06-08 12:42:47 -0400 4) import sys
+    59e1d7d0 (Lars Kellogg-Stedman 2012-06-08 12:42:47 -0400 5) 
+    59e1d7d0 (Lars Kellogg-Stedman 2012-06-08 12:42:47 -0400 6) # Note that in Python 3 "print" becomes a function call
+    59e1d7d0 (Lars Kellogg-Stedman 2012-06-08 12:42:47 -0400 7) # instead of a statement.
+    ^af1bee6 (Lars Kellogg-Stedman 2012-06-08 12:42:06 -0400 8) print "Hello, world."
+    ^af1bee6 (Lars Kellogg-Stedman 2012-06-08 12:42:06 -0400 9) 
 
-# Removing files
+The first column identifes the commit ID that last modified this line.
+This is followed by the committer name, date, and time, and finally by
+the actual file contents.
 
-    git rm newfile.txt
+## Staging changes/Adding files
 
-# Committing changes
+You add changes to your repository with the `add` command.  Create a
+file called `newfile.txt`:
 
-# When things go wrong
+    $ echo This is a test. > newfile.txt
 
-## Redoing previous commit
+And add this to the repository:
 
-## Revert
+    $ git add newfile.txt
 
-## Reset
+And now run `git status`:
 
-# Tags
+    $ git status
+    # On branch master
+    # Changes to be committed:
+    #   (use "git reset HEAD <file>..." to unstage)
+    #
+    #       new file:   newfile.txt
+    #
 
-# Managing branches
+This shows that the next time we run "commit", this file will be added
+to the repository.  Go ahead and commit the changes:
 
-## Merging and rebasing
+    $ git ci -m 'Added a new file.'
+     1 files changed, 1 insertions(+), 0 deletions(-)
+     create mode 100644 newfile.txt
 
-# Interacting with remote repositories
+## Removing files
 
-## Cloning a remote repository
+    $ git rm newfile.txt
 
-## Add a remote repository
+## Committing changes
 
-## Pushing your changes
+## When things go wrong
+
+### Redoing previous commit
+
+### Revert
+
+### Reset
+
+## Tags
+
+## Managing branches
+
+### Merging and rebasing
+
+## Interacting with remote repositories
+
+### Cloning a remote repository
+
+### Add a remote repository
+
+### Pushing your changes
+
+## About this document
+
+The complete source for this document is available at
+<http://code.seas.harvard.edu/git-workshop>.
+
+This document was written using [markdown][], a lightweight markup language.  
+The markdown source for this document is available [here][source].
+
+[source]: gitworkshop.txt
+[markdown]: http://daringfireball.net/projects/markdown/
 
