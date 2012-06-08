@@ -1,0 +1,6 @@
+#!/bin/sh
+
+inotifywait -rm -e close_write . @.git | while read path evt name; do
+	make
+done
+
