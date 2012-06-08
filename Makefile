@@ -11,7 +11,7 @@ gitworkshop-styled.html: gitworkshop.html toc.html template.html
 		-v title="Git Workshop" $(TEMPLATE) > $@ || rm -f $@
 
 toc.html: gitworkshop.html
-	bin/gentoc -m1 < $< > $@ || rm -f $@
+	bin/gentoc -m2 < $< > $@ || rm -f $@
 
 clean:
 	rm -f gitworkshop.html gitworkshop-styled.html toc.html
