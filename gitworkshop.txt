@@ -249,7 +249,7 @@ The first column identifes the commit ID that last modified this line.
 This is followed by the committer name, date, and time, and finally by
 the actual file contents.
 
-## Staging changes/Adding files
+## Adding changes
 
 You add changes to your repository with the `add` command.  Create a
 file called `newfile.txt`:
@@ -270,10 +270,15 @@ And now run `git status`:
     #       new file:   newfile.txt
     #
 
-This shows that the next time we run "commit", this file will be added
-to the repository.  Go ahead and commit the changes:
+This shows that the next time we run `commit`, this file will be added
+to the repository. 
 
-    $ git ci -m 'Added a new file.'
+## Committing changes
+
+The `commit` command records changes in your repository.  Let's commit
+the changes we made in the previous step:
+
+    $ git commit -m 'Added a new file.'
      1 files changed, 1 insertions(+), 0 deletions(-)
      create mode 100644 newfile.txt
 
@@ -281,15 +286,37 @@ to the repository.  Go ahead and commit the changes:
 
     $ git rm newfile.txt
 
-## Committing changes
-
 ## When things go wrong
 
 ### Redoing previous commit
 
-### Revert
+If immediately after you commit changes to a repository you realize
+you've made a mistake, you can replace the previous commit with a new one
+using the `--amend` option to the `commit` command.
+
+For example, let's say that after committing some changes to a
+website...
+
+    $ git commit -m "use new stylesheets in all of our pages"
+
+...you realized that you had forgotten to actually add the stylesheets
+as part of the commit.  You can type:
+
+    $ git add css
+    $ git commit --amend
+
+This will replace the previous commit with a new one containing both
+the changes from the previuos commit and your most recent changes.
 
 ### Reset
+
+The `reset` command will **discard history** from your project and
+reset your repository to a prior state. 
+
+### Revert
+
+The `revert` command will generate a new commit that reverses the
+changes caused by a previous commit.
 
 ## Tags
 
@@ -315,4 +342,6 @@ The markdown source for this document is available [here][source].
 
 [source]: gitworkshop.txt
 [markdown]: http://daringfireball.net/projects/markdown/
+
+<!-- vim: set ft=markdown : -->
 
