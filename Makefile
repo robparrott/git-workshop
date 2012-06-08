@@ -14,4 +14,4 @@ toc.html: gitworkshop.html
 	bin/gentoc -m1 < $< > $@ || rm -f $@
 
 clean:
-	rm -f gitworkshop.html gitworkshop-styled.html
+	rm -f gitworkshop.html gitworkshop-styled.html toc.html
