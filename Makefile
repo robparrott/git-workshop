@@ -1,6 +1,6 @@
 TEMPLATE = template.html
 
-%.html: %.md
+%.html: %.txt
 	markdown2 -x toc -x wiki-tables -x fenced-code-blocks $< >$@ || rm -f $@
 
 all: gitworkshop-styled.html
