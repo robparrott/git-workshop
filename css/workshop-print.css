@@ -1,7 +1,8 @@
+@import url('workshop-common.css');
+
 #toc {
 	display: none;
 }
-
 
 a, a:link, a:visited {
 	text-decoration: none;
