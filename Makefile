@@ -1,6 +1,6 @@
 TEMPLATE = template.html
 
-%.html: %.txt
+%.html: %.md
 	markdown2 -x toc -x wiki-tables -x fenced-code-blocks $< >$@ || rm -f $@
 
 all: index.html

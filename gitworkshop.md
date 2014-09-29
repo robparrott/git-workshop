@@ -55,8 +55,10 @@ configuration files:
 Git provides a simple way to open your global configuration file in an
 editor:
 
-    $ git config --global --edit
-          
+```
+$ git config --global --edit          
+```
+
 ### Name and email
 
 Git needs to know who you are in order to correctly attribute your
@@ -164,7 +166,16 @@ Which should result in output along the lines of:
 After the `clone` operation completes, you will have a directory
 called `sample1` inside your current directory.
 
-## What's changed?
+### Cloning This Repository
+
+A quick way to get a git repo in place to work with is to simply clone this repository:
+
+```
+git clone http://github.com/robparrott/git-workshop
+cd git-workshop
+```
+
+## What's here? What's changed?
 
 ### git status
 
@@ -193,6 +204,13 @@ And re-run `git status`:
 The output shows that there is a new file in our working directory
 that git knows nothing about ("untracked").  We will look at how to
 add this file to the repository in the next section.
+
+### git ls-files
+
+To get a listing of all files in the repository, use `ls-files`
+```
+git ls-files
+```
 
 ### git diff
 
@@ -229,6 +247,40 @@ And re-run `git diff`:
 
 The output of `git diff` shows where we have added or removed (or
 modified) lines.
+
+You can also use ``git diff`` to see the changes between arbitrary revisions of your project:
+
+- Changes in working copy vs. previous commit::
+
+```
+git diff <commit>
+```
+
+- Changes between two previous commits:
+
+```
+git diff <commit1> <commit2>
+```
+
+### git log
+
+Find out the commits to the repo, and their hash values by examining the log
+
+```
+git log
+```
+
+This shows the commit message and hash values.
+
+### git show 
+
+If you need more information, use `show`
+
+```
+git show
+```
+
+which shows not only logs, but also the changes themselves. Can be quite long.
 
 ### git blame
 
@@ -285,7 +337,13 @@ the changes we made in the previous step:
 
 ## Removing files
 
+Use the `rm` command:
+
     $ git rm newfile.txt
+
+When the file is not up-to-date or you just need to forcefully remove it, use the `-f` forse option
+
+    $ git rm -f annoying-file.txt
 
 ## When things go wrong
 
@@ -321,8 +379,91 @@ changes caused by a previous commit.
 
 ## Tags
 
-## Managing branches
+### Create a tag
 
+Create a tag:
+
+```
+git tag [-a] TAGNAME
+```
+
+- Creates a *lightweight* tag (an alias for a commit object)
+- Add ``-a`` to create an annotated tag (i.e., with an associated message)
+- Also possible to create cryptographically signed tags
+
+See: http://www.kernel.org/pub/software/scm/git/docs/v1.6.6.2/git-tag.html
+
+### Listing tags
+
+```
+git tag
+```
+
+Information about a specific tag:
+```
+git tag -v TAGNAME
+```
+
+## Branches
+
+### List branches:
+
+```
+  git branch -av
+```
+
+The `-av` option is more verbose, and also includes any remote branches.
+
+### Creating branches
+
+Create a branch rooted at *START*:
+```
+git branch BRANCHNAME [START]
+```
+
+See http://www.kernel.org/pub/software/scm/git/docs/v1.6.6.2/git-branch.html
+
+If you omit *START*, the branch is rooted at your current HEAD.
+
+### Changing branches
+
+Switch to a branch:
+
+```
+git checkout BRANCHNAME
+```
+
+Create a branch rooted at *START* and switch to it::
+
+```
+git checkout -b BRANCHNAME [START]
+```
+
+For example, you want to enhance your code with some awesome
+experimental code.  You create a new *seas-workshop-dev* branch and switch
+to it:
+
+```
+$ git checkout -b seas-workshop-dev
+```
+
+You make some changes, and when things are working you commit your branch:
+
+```
+$ git commit -m 'made some awesome changes' -a
+```
+
+And then merge it into the master branch::
+
+```
+     $ git checkout master
+     $ git merge seas-workshop-dev
+     Updating 1288ed3..33e4a4c
+     Fast-forward
+      version-control.rst |    2 ++
+      1 files changed, 2 insertions(+), 0 deletions(-)
+```
+ 
 ### Merging and rebasing
 
 ## Interacting with remote repositories
@@ -332,6 +473,94 @@ changes caused by a previous commit.
 ### Add a remote repository
 
 ### Pushing your changes
+
+
+## Integrating w/ Subversion
+
+You can use git as your Subversion client.  This gives you many of the benefits of a DVCS while still interacting with a Subversion repository.
+
+### Checking out from subversion
+
+Cloning a remote subversion repository:
+
+```
+git svn clone [ -s ] REPO_URL
+```
+
+
+   The ``-s`` flag informs git that your Subversion repository uses the
+   recommended repository layout (i.e., that the top level of your
+   repository contains ``trunk/``, ``tags/``, and ``branches/``
+   directories).  The ``HEAD`` of your working copy will track the trunk.
+
+   This instructs git to clone the *entire* repository, including the
+   complete revision history. This may take a while for repositories with a
+   long history.  You can use the ``-r`` option to request a partial
+   history.  From the man page::
+
+      -r <ARG>, --revision <ARG>
+          Used with the fetch command.
+
+          This allows revision ranges for partial/cauterized history to be
+          supported. $NUMBER, $NUMBER1:$NUMBER2 (numeric ranges),
+          $NUMBER:HEAD, and BASE:$NUMBER are all supported.
+
+          This can allow you to make partial mirrors when running fetch; but
+          is generally not recommended because history will be skipped and
+          lost.
+
+### Commiting
+
+Committing your changes back to the Subversion repository:
+
+```
+git svn dcommit
+```
+
+Before you push your changes to the Subversion repository you need to first commit any pending modifications to your local repository. Otherwise, git will complain:
+
+```
+$ git svn dcommit
+Cannot dcommit with a dirty index.  Commit your changes first, or stash them with `git stash'.
+ at /usr/libexec/git-core/git-svn line 491
+
+ To fix this, commit your changes::
+
+$ git commit -m 'a meaningful commit message' -a
+```
+
+And then send your changes to the Subversion repository:
+
+```
+$ git svn dcommit
+Committing to https://source.seas.harvard.edu/svn/version-control-workshop/trunk ...
+ M    seealso.rst
+Committed r38
+ M    seealso.rst
+r38 = 03254f2c0b3d5e068a87566caef84454558b85b0 (refs/remotes/trunk)
+No changes between current HEAD and refs/remotes/trunk
+Resetting to the latest refs/remotes/trunk
+Unstaged changes after reset:
+ M  git.rst
+ M    git.rst
+Committed r39
+       M    git.rst
+r39 = d1f884a3f945f6083541e28ab7a09ca8efc6343b (refs/remotes/trunk)
+No changes between current HEAD and refs/remotes/trunk
+Resetting to the latest refs/remotes/trunk
+```
+
+### Updating from Subversion
+
+Updating your working copy from the Subversion repository::
+
+```
+git svn rebase
+```
+
+   As with ``git svn dcommit``, you must have a clean working copy before
+   running the ``rebase`` command.
+
 
 ## About this document
 
