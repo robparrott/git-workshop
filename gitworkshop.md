@@ -105,6 +105,8 @@ Start with these:
 
 Otherwise you will go insane during the rest of this workshop.
 
+>Exercise: Install and configure git on your system 
+
 ## Creating a repository
 
 A *repository* is what contains the change history for your project.
@@ -523,7 +525,7 @@ Remember that the repository itself is in `.git/` and that you have cloned the e
 Use the `git remote` command to view the current set of remotes:
 
 ```
-± |master ✗| → git remote -v
+git remote -v
 origin  git@github.com:robparrott/git-workshop.git (fetch)
 origin  git@github.com:robparrott/git-workshop.git (push)
 ```
