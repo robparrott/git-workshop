@@ -385,6 +385,52 @@ Login here:
 
 ----
 
+
+## Interacting with remote repositories
+
+Because git is a distributed version control system, your local repository can have a relationship with more than one remote repositories. To do so, you need to learn how to specify and work with multiple remote repositories.
+
+### Cloning a remote repository
+
+This is the first step in working with someone else's codebase.
+
+```
+git clone http://github.com/robparrott/git-workshop
+cd git-workshop
+```
+
+Remember that the repository itself is in `.git/` and that you have cloned the entire history of the repository as well as the current state.
+
+Use the `git remote` command to view the current set of remotes:
+
+```
+git remote -v
+origin  git@github.com:robparrott/git-workshop.git (fetch)
+origin  git@github.com:robparrott/git-workshop.git (push)
+```
+
+Note that by default there was a remote named `origin` created which points to the cloned remote repository.
+
+### Add a remote repository
+
+Now you can add another repository beside the `origin` one. This could be your own copy on GitHub, when you don't have write access to the cloned repo.
+
+```
+git remote add mycopy git@github.com:robparrott/git-workshop2.git
+```
+
+You can have as many remotes as needed; you just need to keep track.
+
+### Pushing your changes
+
+Now that you have two remotes set up, you need to specify which one when you pushg your changes. To push custom changes from the local repository to the "master" brnahc on your new repository:
+
+```
+git push mycopy master
+```
+
+In general the command `git push` is shorthand for `git push origin master`.
+
 ## A Little Theory
 
 ### The repository
@@ -417,11 +463,16 @@ In addition:
 - ``git diff --cached`` is the difference between the index and the local
   repository.
 
-
 Refer to this illustration to see how the index fits in:
 
 ![git-transport.png](./images/git-transport.png)  
 (This image used with permission.)
+
+----
+> **Exercise:** Fork on GitHub this repository into your own, then clone that locally. Setup a new remote named "upstream" that tracks the original repository, keeping your copy under the name "origin". Make a trivial change to this repository, then push that change back to your copy or "fork" on GitHub. Once the change is pushed, use the GitHub GUI to create a "Pull Request" (PR) against the original repository. 
+>
+
+----
 
 
 ## When things go wrong
@@ -543,56 +594,10 @@ And then merge it into the master branch::
       1 files changed, 2 insertions(+), 0 deletions(-)
 ```
  
-### Merging and rebasing
 
-## Interacting with remote repositories
+## Merging and rebasing
 
-Because git is a distributed version control system, your local repository can have a relationship with more than one remote repositories. To do so, you need to learn how to specify and work with multiple remote repositories.
 
-### Cloning a remote repository
-
-This is the first step in working with someone else's codebase.
-
-```
-git clone http://github.com/robparrott/git-workshop
-cd git-workshop
-```
-
-Remember that the repository itself is in `.git/` and that you have cloned the entire history of the repository as well as the current state.
-
-Use the `git remote` command to view the current set of remotes:
-
-```
-git remote -v
-origin  git@github.com:robparrott/git-workshop.git (fetch)
-origin  git@github.com:robparrott/git-workshop.git (push)
-```
-
-Note that by default there was a remote named `origin` created which points to the cloned remote repository.
-
-### Add a remote repository
-
-Now you can add another repository beside the `origin` one. This could be your own copy on GitHub, when you don't have write access to the cloned repo.
-
-```
-git remote add mycopy git@github.com:robparrott/git-workshop2.git
-```
-
-You can have as many remotes as needed; you just need to keep track.
-
-### Pushing your changes
-
-Now that you have two remotes set up, you need to specify which one when you pushg your changes. To push custom changes from the local repository to the "master" brnahc on your new repository:
-
-```
-git push mycopy master
-```
-
-In general the command `git push` is shorthand for `git push origin master`.
-
-##  GitHub
-
-GitHub has become the 
 ## Integrating w/ Subversion
 
 You can use git as your Subversion client.  This gives you many of the benefits of a DVCS while still interacting with a Subversion repository.
