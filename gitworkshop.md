@@ -353,7 +353,7 @@ the changes we made in the previous step:
      1 files changed, 1 insertions(+), 0 deletions(-)
      create mode 100644 newfile.txt
 
-## Removing files
+### Removing files
 
 Use the `rm` command:
 
@@ -377,7 +377,7 @@ One of the most useful features is the ability to fork (i.e. make a complete cop
 
 Login here:
 
-- http://github.com/
+- [http://github.com/](http://github.com/)
 
 ----
 > **Exercise:** Create a brand new repository in GitHub that includes a README file. Using the GUI create an additional file in the repo with minimal contents. Once created, clone the repo locally. Make changes locally, including adding a new file, editing a file, and removing a file. Capture these into the index, commit, and then push to your GitHub repository. Confirm the changes are in place on GitHub.
@@ -570,11 +570,11 @@ git checkout -b BRANCHNAME [START]
 ```
 
 For example, you want to enhance your code with some awesome
-experimental code.  You create a new *seas-workshop-dev* branch and switch
+experimental code.  You create a new *workshop* branch and switch
 to it:
 
 ```
-$ git checkout -b seas-workshop-dev
+$ git checkout -b workshop
 ```
 
 You make some changes, and when things are working you commit your branch:
@@ -594,6 +594,37 @@ And then merge it into the master branch::
       1 files changed, 2 insertions(+), 0 deletions(-)
 ```
  
+### Pushing branches
+
+When you create a local branch and you want to push that branch to a remote repository, you need to specify the name of the remote branch to push to, and usually create it beforehand. This is done using the `-u` flag:
+
+```
+git push origin -u workshop
+```
+
+This should create a new branch remotyely and push this branch to it. An entry in your local git config will be created to remember this mapping.
+
+### Deleting branches
+
+To delete a local branch, use the `-D` option:
+```
+git branch -D workshop
+```
+
+If you want to remove a remote branch, you need to push to the branch specifying deletion. Newer versions of git use the `--delete` option
+```
+git push origin --delete workshop
+```
+while older version use the syntax
+```
+git push origin :workshop
+```
+
+----
+> **Exercise:** Using a repository from a previous exercise, tag your current version as a new tag. Next create a local branch and checkout that branch. Make changes on that branch, and commit them locally. Next push those changes to the remote. Confirm that works, then checkout your local master, mefrge the changes from the local branch, and push the master. Once that's done, delete both the local and remote branches.
+>
+
+----
 
 ## Merging and rebasing
 
