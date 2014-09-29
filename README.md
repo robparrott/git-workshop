@@ -1,6 +1,6 @@
 ## git-workshop
 
-Steve Martino's edits
+Steve Martino's edits again.
 
 Workshop on Git originally developed by Lars Kellogg-Stedman for Harvard SEAS, and expanded by Rob Parrott.
 
