@@ -581,6 +581,15 @@ git tag [-a] TAGNAME
 
 See: http://www.kernel.org/pub/software/scm/git/docs/v1.6.6.2/git-tag.html
 
+### Pushing a tag
+
+Once you've created a tag, you need to push it to a remote repository for it to be used and released. Use git push:
+
+```
+git push --tags
+```
+
+
 ### Listing tags
 
 ```
