@@ -13,15 +13,13 @@ If you are using Ubuntu or Debian, try:
 
 ### For OS X
 
-The [git website][] provides an [installer for OS X][osx installer],
-but you will probably be better off installing [MacPorts][], a
-collection of open source software for OS X, and then running:
+The [git website](http://git-scm.org) provides an [installer for OS X][osx installer], but you will probably be better off installing [HomeBrew](http://brew.sh), a collection of open source software for OS X, and then running:
 
-    $ sudo port install git-core
+    $ sudo brew install git
 
-[git website]: http://git-scm.org
-[osx installer]: http://git-scm.com/download/mac
-[macports]: http://macports.org
+* [git website](http://git-scm.org)
+* [OSX Installer](http://git-scm.com/download/mac)
+* [Homebrew](http://macports.org)
 
 ### For Windows
 
