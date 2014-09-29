@@ -532,11 +532,11 @@ Often with incremental updates, only differences are transferred, which makes gi
 
 ### The working copy
 
-All the files that you work with and edit are called the _working copy_, but are not the actual git repository. They can all deleted and you can still work with the repository. These files and their changes only become part of the repositiry after being added to the _index_ and them commited.
+All the files that you work with and edit are called the _working copy_, but are not the actual git repository. They can all deleted and you can still work with the repository. These files and their changes only become part of the repository after being added to the _index_ and them commited.
 
 ### The Index
 
-Git is not really just like Subversion (or most other version control solutions). It uses an additional stage to allow you to do distrbuted version control: the _Index_.
+Git is not really just like Subversion (or most other version control solutions). It uses an additional stage to allow you to do distributed version control: the _Index_.
 
 - The *index* is a staging area between your working copy and your local
   repository.
@@ -666,7 +666,7 @@ When you create a local branch and you want to push that branch to a remote repo
 git push origin -u workshop
 ```
 
-This should create a new branch remotyely and push this branch to it. An entry in your local git config will be created to remember this mapping.
+This should create a new branch remotely and push this branch to it. An entry in your local git config will be created to remember this mapping.
 
 ### Deleting branches
 
@@ -689,7 +689,7 @@ git push origin :workshop
 ```
 
 ----
-> **Exercise:** Using a repository from a previous exercise, tag your current version as a new tag. Next create a local branch and checkout that branch. Make changes on that branch, and commit them locally. Next push those changes to the remote. Confirm that works, then checkout your local master, mefrge the changes from the local branch, and push the master. Once that's done, delete both the local and remote branches.
+> **Exercise:** Using a repository from a previous exercise, tag your current version as a new tag. Next create a local branch and checkout that branch. Make changes on that branch, and commit them locally. Next push those changes to the remote. Confirm that works, then checkout your local master, merge the changes from the local branch, and push the master. Once that's done, delete both the local and remote branches.
 >
 
 ----
@@ -700,7 +700,7 @@ git push origin :workshop
 >
 >Git + GitHub makes code review very easy. Instead of pushing changes to master, create a new branch, then push that branch to a remote remote branch of the same name.
 >
-Then in GitHub, create a "Pull Request." Ask a collaborator to review that Pull Request. If you are disclined ad follow this simpe process for every changeset, you get code review for free. 
+Then in GitHub, create a "Pull Request." Ask a collaborator to review that Pull Request. If you are disclined ad follow this simple process for every changeset, you get code review for free. 
 >
 >To start, create a local repository and populate it with some content:
 >
@@ -815,7 +815,7 @@ changes caused by a previous commit.
 
 ## Conflicts
 
-A conflict occurrs when two people make overlapping changes.
+A conflict occurs when two people make overlapping changes.
 
 - Detected when you attempt to update your working copy via ``git pull``.
 - You may discard your changes, discard the repository changes, or attempt to correct things manually.
