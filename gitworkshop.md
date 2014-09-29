@@ -134,7 +134,7 @@ using `git`, the process will look something like this:
 
     $ cd myproject
     $ git init
-    Initialized empty Git repository in /home/lars/myproject/.git/
+    Initialized empty Git repository in myproject/.git/
     $ git add .
     $ git commit -m 'initial import'
 
@@ -181,6 +181,13 @@ A quick way to get a git repo in place to work with is to simply clone this repo
 git clone http://github.com/robparrott/git-workshop
 cd git-workshop
 ```
+
+----
+>
+> **Exercise:** Create a simple repository from a directory, and add some files to it. Then clone that repository to another repository in a different directory on your system. Next clone the repository one more time, but as a "bare" repository using the `--bare` flag. Compare the contents of that directory to the contents of the `.git/` directory of the original repository. What's missing and what's the same?
+>
+
+----
 
 ## What's here? What's changed?
 
@@ -308,6 +315,13 @@ For example, running `git blame` on the file `hello.py` yields:
 The first column identifes the commit ID that last modified this line.
 This is followed by the committer name, date, and time, and finally by
 the actual file contents.
+
+----
+>
+> **Exercise:** Clone this repository, and investigate it's files and history. When was this line (i.e. this text) written and by whom?
+>
+
+----
 
 ## Adding changes
 
