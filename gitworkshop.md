@@ -522,8 +522,6 @@ Login here:
 
 ----
 
-
-
 ## A Little Theory
 
 ### The repository
@@ -563,6 +561,128 @@ Refer to this illustration to see how the index fits in:
 
 ----
 > **Exercise:** Fork on GitHub this repository into your own, then clone that locally. Setup a new remote named "upstream" that tracks the original repository, keeping your copy under the name "origin". Make a trivial change to this repository, then push that change back to your copy or "fork" on GitHub. Once the change is pushed, use the GitHub GUI to create a "Pull Request" (PR) against the original repository. 
+>
+
+----
+
+## Tags & Branches
+
+### Create a tag
+
+Create a tag:
+
+```
+git tag [-a] TAGNAME
+```
+
+- Creates a *lightweight* tag (an alias for a commit object)
+- Add ``-a`` to create an annotated tag (i.e., with an associated message)
+- Also possible to create cryptographically signed tags
+
+See: http://www.kernel.org/pub/software/scm/git/docs/v1.6.6.2/git-tag.html
+
+### Listing tags
+
+```
+git tag
+```
+
+Information about a specific tag:
+```
+git tag -v TAGNAME
+```
+
+### Listing branches:
+
+```
+  git branch -av
+```
+
+The `-av` option is more verbose, and also includes any remote branches.
+
+### Creating branches
+
+Create a branch rooted at *START*:
+
+```
+git branch BRANCHNAME [START]
+```
+
+See http://www.kernel.org/pub/software/scm/git/docs/v1.6.6.2/git-branch.html
+
+If you omit *START*, the branch is rooted at your current HEAD.
+
+### Changing branches
+
+Switch to a branch:
+
+```
+git checkout BRANCHNAME
+```
+
+Create a branch rooted at *START* and switch to it::
+
+```
+git checkout -b BRANCHNAME [START]
+```
+
+For example, you want to enhance your code with some awesome
+experimental code.  You create a new *workshop* branch and switch
+to it:
+
+```
+$ git checkout -b workshop
+```
+
+You make some changes, and when things are working you commit your branch:
+
+```
+$ git commit -m 'made some awesome changes' -a
+```
+
+And then merge it into the master branch::
+
+```
+     $ git checkout master
+     $ git merge seas-workshop-dev
+     Updating 1288ed3..33e4a4c
+     Fast-forward
+      version-control.rst |    2 ++
+      1 files changed, 2 insertions(+), 0 deletions(-)
+```
+ 
+### Pushing branches
+
+When you create a local branch and you want to push that branch to a remote repository, you need to specify the name of the remote branch to push to, and usually create it beforehand. This is done using the `-u` flag:
+
+```
+git push origin -u workshop
+```
+
+This should create a new branch remotyely and push this branch to it. An entry in your local git config will be created to remember this mapping.
+
+### Deleting branches
+
+To delete a local branch, use the `-D` option:
+
+```
+git branch -D workshop
+```
+
+If you want to remove a remote branch, you need to push to the branch specifying deletion. Newer versions of git use the `--delete` option
+
+```
+git push origin --delete workshop
+```
+
+while older version use the syntax
+
+```
+git push origin :workshop
+```
+
+----
+> **Exercise:** Using a repository from a previous exercise, tag your current version as a new tag. Next create a local branch and checkout that branch. Make changes on that branch, and commit them locally. Next push those changes to the remote. Confirm that works, then checkout your local master, mefrge the changes from the local branch, and push the master. Once that's done, delete both the local and remote branches.
 >
 
 ----
@@ -650,124 +770,6 @@ When you complete the above tasks:
 
 Once your local repository is in good working order, you can push the changes back to a remote repository.
 
-## Tags
-
-### Create a tag
-
-Create a tag:
-
-```
-git tag [-a] TAGNAME
-```
-
-- Creates a *lightweight* tag (an alias for a commit object)
-- Add ``-a`` to create an annotated tag (i.e., with an associated message)
-- Also possible to create cryptographically signed tags
-
-See: http://www.kernel.org/pub/software/scm/git/docs/v1.6.6.2/git-tag.html
-
-### Listing tags
-
-```
-git tag
-```
-
-Information about a specific tag:
-```
-git tag -v TAGNAME
-```
-
-## Branches
-
-### List branches:
-
-```
-  git branch -av
-```
-
-The `-av` option is more verbose, and also includes any remote branches.
-
-### Creating branches
-
-Create a branch rooted at *START*:
-```
-git branch BRANCHNAME [START]
-```
-
-See http://www.kernel.org/pub/software/scm/git/docs/v1.6.6.2/git-branch.html
-
-If you omit *START*, the branch is rooted at your current HEAD.
-
-### Changing branches
-
-Switch to a branch:
-
-```
-git checkout BRANCHNAME
-```
-
-Create a branch rooted at *START* and switch to it::
-
-```
-git checkout -b BRANCHNAME [START]
-```
-
-For example, you want to enhance your code with some awesome
-experimental code.  You create a new *workshop* branch and switch
-to it:
-
-```
-$ git checkout -b workshop
-```
-
-You make some changes, and when things are working you commit your branch:
-
-```
-$ git commit -m 'made some awesome changes' -a
-```
-
-And then merge it into the master branch::
-
-```
-     $ git checkout master
-     $ git merge seas-workshop-dev
-     Updating 1288ed3..33e4a4c
-     Fast-forward
-      version-control.rst |    2 ++
-      1 files changed, 2 insertions(+), 0 deletions(-)
-```
- 
-### Pushing branches
-
-When you create a local branch and you want to push that branch to a remote repository, you need to specify the name of the remote branch to push to, and usually create it beforehand. This is done using the `-u` flag:
-
-```
-git push origin -u workshop
-```
-
-This should create a new branch remotyely and push this branch to it. An entry in your local git config will be created to remember this mapping.
-
-### Deleting branches
-
-To delete a local branch, use the `-D` option:
-```
-git branch -D workshop
-```
-
-If you want to remove a remote branch, you need to push to the branch specifying deletion. Newer versions of git use the `--delete` option
-```
-git push origin --delete workshop
-```
-while older version use the syntax
-```
-git push origin :workshop
-```
-
-----
-> **Exercise:** Using a repository from a previous exercise, tag your current version as a new tag. Next create a local branch and checkout that branch. Make changes on that branch, and commit them locally. Next push those changes to the remote. Confirm that works, then checkout your local master, mefrge the changes from the local branch, and push the master. Once that's done, delete both the local and remote branches.
->
-
-----
 
 ## Merging and rebasing
 
