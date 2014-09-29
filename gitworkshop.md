@@ -689,81 +689,81 @@ git push origin :workshop
 
 ## GitHub Workflow
 
-This extended exercise deomstrates using GitHub to do distributed development.
-
-Git + GitHub makes code review very easy. Instead of pushing changes to master, create a new branch, then push that branch to a remote remote branch of the same name.
-
+>This extended exercise demonstrates using GitHub to do distributed development.
+>
+>Git + GitHub makes code review very easy. Instead of pushing changes to master, create a new branch, then push that branch to a remote remote branch of the same name.
+>
 Then in GitHub, create a "Pull Request." Ask a collaborator to review that Pull Request. If you are disclined ad follow this simpe process for every changeset, you get code review for free. 
-
-To start, create a local repository and populate it with some content:
-
-```
-$ mkdir tutorial_code
-$ cd tutorial_code
-
-# create a git repository here
-$ git init
-
-# add some files 
-$ git add (my files)
-
-# where are we ?
-$ git status
-
-# commit those files
-$ git commit -m "my first checkin"
-
-# Make some changes. Let's see 
-#  what's changed
-$ git diff
-$ git commit -m "more changes"
-```
-
-Now that you have a basic repo, we want push it to GitHub. First, we'll need to create a repository in GitHub, and the following the directions, setup the remote properly. When done, push it.
-
-```
-# create a repository in GitHub or 
-#  elsewhere, then setup a "remote"
-$ git remote add origin [url]
-
-# Now, let's push those changes remotely
-$ git push origin master
-```
-
-### Branch and Merge
-
-Now let's do some experimental work on a different branch:
-
-```
-# I want to make some more changes, so
-#   create a branch track them
-$ git checkout -b my_new_feature_branch
-
-# Make some changes.
-
-# What has changed?
-$ git status
-$ git diff somefile.code
-
-# make some more changes ...
-
-# add the changes, then comit
-$ git add [files]
-$ git commit -m "my new feature"
-
-# Now push those changes to a new branch
-#  on the remote server
-$ git push origin -u my_new_feature_branch
-```
-
-Once the branch is pushed, go to GitHub and create a Pull Request by browsing to the branch and clicking a button.
-
-Collaborators on the repo will need notified by email, and can view changes, and merge if they approve.
-
-### Fork and Merge
-
-Now do the same, but instead of branching, use GitHub forking to make the changes. Have someone else fork your repo in GitHub, and they will make changes to their copy of your repo. Once their changes are checked back in, have them create a Pull Request, and merge.
-
+>
+>To start, create a local repository and populate it with some content:
+>
+>```
+>$ mkdir tutorial_code
+>$ cd tutorial_code
+>
+># create a git repository here
+>$ git init
+>
+># add some files 
+>$ git add (my files)
+>
+># where are we ?
+>$ git status
+>
+># commit those files
+>$ git commit -m "my first checkin"
+>
+># Make some changes. Let's see 
+>#  what's changed
+>$ git diff
+>$ git commit -m "more changes"
+>```
+>
+>Now that you have a basic repo, we want push it to GitHub. First, we'll need to create a repository in GitHub, and the following the directions, setup the remote properly. When done, push it.
+>
+>```
+># create a repository in GitHub or 
+>#  elsewhere, then setup a "remote"
+>$ git remote add origin [url]
+>
+># Now, let's push those changes remotely
+>$ git push origin master
+>```
+>
+>### Branch and Merge
+>
+>Now let's do some experimental work on a different branch:
+>
+>```
+># I want to make some more changes, so
+>#   create a branch track them
+>$ git checkout -b my_new_feature_branch
+>
+># Make some changes.
+>
+># What has changed?
+>$ git status
+>$ git diff somefile.code
+>
+># make some more changes ...
+>
+># add the changes, then comit
+>$ git add [files]
+>$ git commit -m "my new feature"
+>
+># Now push those changes to a new branch
+>#  on the remote server
+>$ git push origin -u my_new_feature_branch
+>```
+>
+>Once the branch is pushed, go to GitHub and create a Pull Request by browsing to the branch and clicking a button.
+>
+>Collaborators on the repo will need notified by email, and can view changes, and merge if they approve.
+>
+>### Fork and Merge
+>
+>Now do the same, but instead of branching, use GitHub forking to make the changes. Have someone else fork your repo in GitHub, and they will make changes to their copy of your repo. Once their changes are checked back in, have them create a Pull Request, and merge.
+>
 
 ## When things go wrong
 
