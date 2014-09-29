@@ -109,6 +109,7 @@ Otherwise you will go insane during the rest of this workshop.
 >
 > **Exercise:** Install and configure git on your system.
 >
+
 ----
 
 ## Creating a repository
