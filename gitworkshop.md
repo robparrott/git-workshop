@@ -36,7 +36,7 @@ Linux and OS X.
 
 [msysgit]: http://code.google.com/p/msysgit/
 
-## Initial configuration
+## Initial Configuration
 
 Git will look for configuration information inside the per-repository
 `.git/config` file and in the global `$HOME/.gitconfig`.  The `git config`
@@ -111,7 +111,7 @@ Otherwise you will go insane during the rest of this workshop.
 
 ----
 
-## Getting help
+## Getting Help
 
 Most commands have built-in documentation you can access with the
   ``--help`` option::
@@ -126,7 +126,7 @@ git init --help
 man git-init
 ```
 
-## Creating a repository
+## Creating a Repository
 
 A *repository* is what contains the change history for your project.
 
@@ -202,9 +202,9 @@ cd git-workshop
 
 ----
 
-## What's here? What's changed?
+## What's Here? What's Changed?
 
-### git status
+### `git status`
 
 The `git status` command displays information about the state of files
 in your working directory. If you were to run it inside the `sample1`
@@ -232,7 +232,7 @@ The output shows that there is a new file in our working directory
 that git knows nothing about ("untracked").  We will look at how to
 add this file to the repository in the next section.
 
-### git ls-files
+### `git ls-files`
 
 To get a listing of all files in the repository, use `ls-files`
 
@@ -240,7 +240,7 @@ To get a listing of all files in the repository, use `ls-files`
 git ls-files
 ```
 
-### git diff
+### `git diff`
 
 The `diff` command shows the changes between different versions of
 your files.  Without any additional parameters, it will show the
@@ -290,7 +290,7 @@ git diff <commit>
 git diff <commit1> <commit2>
 ```
 
-### git log
+### `git log`
 
 Find out the commits to the repo, and their hash values by examining the log
 
@@ -300,7 +300,7 @@ git log
 
 This shows the commit message and hash values.
 
-### git show 
+### `git show` 
 
 If you need more information, use `show`
 
@@ -310,7 +310,7 @@ git show
 
 which shows not only logs, but also the changes themselves. Can be quite long.
 
-### git blame
+### `git blame`
 
 The `blame` command shows who is responsible for each line in a file.
 For example, running `git blame` on the file `hello.py` yields:
@@ -336,7 +336,7 @@ the actual file contents.
 
 ----
 
-## Making changes
+## Making Changes
 
 ### Adding Changes
 
@@ -687,7 +687,7 @@ git push origin :workshop
 
 ----
 
-## GitHub Workflow
+## Exercise: GitHub Workflow
 
 >This extended exercise demonstrates using GitHub to do distributed development.
 >
@@ -765,7 +765,7 @@ Then in GitHub, create a "Pull Request." Ask a collaborator to review that Pull 
 >Now do the same, but instead of branching, use GitHub forking to make the changes. Have someone else fork your repo in GitHub, and they will make changes to their copy of your repo. Once their changes are checked back in, have them create a Pull Request, and merge.
 >
 
-## When things go wrong
+## When Things Go Wrong
 
 ### Redoing previous commit
 
@@ -848,7 +848,7 @@ When you complete the above tasks:
 Once your local repository is in good working order, you can push the changes back to a remote repository.
 
 
-## Merging and rebasing
+## Merging and Rebasing
 
 (TBD)
 
