@@ -648,7 +648,7 @@ When you complete the above tasks:
 
 Once your local repository is in good working order, you can push the changes back to a remote repository.
 
-## Tags
+## Tags & Branches
 
 ### Create a tag
 
@@ -675,9 +675,7 @@ Information about a specific tag:
 git tag -v TAGNAME
 ```
 
-## Branches
-
-### List branches:
+### Listing branches:
 
 ```
   git branch -av
