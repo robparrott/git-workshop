@@ -522,8 +522,6 @@ Login here:
 
 ----
 
-
-
 ## A Little Theory
 
 ### The repository
@@ -690,6 +688,7 @@ The `-av` option is more verbose, and also includes any remote branches.
 ### Creating branches
 
 Create a branch rooted at *START*:
+
 ```
 git branch BRANCHNAME [START]
 ```
@@ -750,15 +749,19 @@ This should create a new branch remotyely and push this branch to it. An entry i
 ### Deleting branches
 
 To delete a local branch, use the `-D` option:
+
 ```
 git branch -D workshop
 ```
 
 If you want to remove a remote branch, you need to push to the branch specifying deletion. Newer versions of git use the `--delete` option
+
 ```
 git push origin --delete workshop
 ```
+
 while older version use the syntax
+
 ```
 git push origin :workshop
 ```
