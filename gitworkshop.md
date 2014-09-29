@@ -565,89 +565,6 @@ Refer to this illustration to see how the index fits in:
 
 ----
 
-
-## When things go wrong
-
-### Redoing previous commit
-
-If immediately after you commit changes to a repository you realize
-you've made a mistake, you can replace the previous commit with a new one
-using the `--amend` option to the `commit` command.
-
-For example, let's say that after committing some changes to a
-website...
-
-    $ git commit -m "use new stylesheets in all of our pages"
-
-...you realized that you had forgotten to actually add the stylesheets
-as part of the commit.  You can type:
-
-    $ git add css
-    $ git commit --amend
-
-This will replace the previous commit with a new one containing both
-the changes from the previuos commit and your most recent changes.
-
-### Reset
-
-The `reset` command will **discard history** from your project and
-reset your repository to a prior state. 
-
-Use the ``git reset`` command to "undo" an add operation::
-
-```
-git reset HEAD
-```
-
-This resets the index but leaves your working directory untouched. You
-can also use `git reset` to revert to a previous commit, using the hash or a tag name; read the documentation for more information.
-
-### Revert
-
-The `revert` command will generate a new commit that reverses the
-changes caused by a previous commit.
-
-## Conflicts
-
-A conflict occurrs when two people make overlapping changes.
-
-- Detected when you attempt to update your working copy via ``git pull``.
-- You may discard your changes, discard the repository changes, or attempt to correct things manually.
-
-If you attempt to pull in changes that conflict with your working tree, you will see an error similar to the following:
-
-```
-$ git pull
-remote: Counting objects: 5, done.
-remote: Compressing objects: 100% (3/3), done.
-remote: Total 3 (delta 2), reused 0 (delta 0)
-Unpacking objects: 100% (3/3), done.
-From /Users/lars/projects/version-control-workshop/work/repo2
-   4245cb6..84f1112  master     -> origin/master
-Auto-merging README
-CONFLICT (content): Merge conflict in README
-Automatic merge failed; fix conflicts and then commit the result.
-```
-   
-To resolve the conflict manually:
-
-- Edit the conflicting files as necessary.
-
-To discard your changes (and accept the remote repository version)::
-
-- run ``git checkout --theirs README``
-
-To override the repository with your changes:
-
-- run ``git checkout --ours README``
-
-When you complete the above tasks:
- 
-- add the files with ``git add``
-- commit the changes with ``git commit``.
-
-Once your local repository is in good working order, you can push the changes back to a remote repository.
-
 ## Tags & Branches
 
 ### Create a tag
@@ -769,6 +686,90 @@ git push origin :workshop
 >
 
 ----
+
+
+## When things go wrong
+
+### Redoing previous commit
+
+If immediately after you commit changes to a repository you realize
+you've made a mistake, you can replace the previous commit with a new one
+using the `--amend` option to the `commit` command.
+
+For example, let's say that after committing some changes to a
+website...
+
+    $ git commit -m "use new stylesheets in all of our pages"
+
+...you realized that you had forgotten to actually add the stylesheets
+as part of the commit.  You can type:
+
+    $ git add css
+    $ git commit --amend
+
+This will replace the previous commit with a new one containing both
+the changes from the previuos commit and your most recent changes.
+
+### Reset
+
+The `reset` command will **discard history** from your project and
+reset your repository to a prior state. 
+
+Use the ``git reset`` command to "undo" an add operation::
+
+```
+git reset HEAD
+```
+
+This resets the index but leaves your working directory untouched. You
+can also use `git reset` to revert to a previous commit, using the hash or a tag name; read the documentation for more information.
+
+### Revert
+
+The `revert` command will generate a new commit that reverses the
+changes caused by a previous commit.
+
+## Conflicts
+
+A conflict occurrs when two people make overlapping changes.
+
+- Detected when you attempt to update your working copy via ``git pull``.
+- You may discard your changes, discard the repository changes, or attempt to correct things manually.
+
+If you attempt to pull in changes that conflict with your working tree, you will see an error similar to the following:
+
+```
+$ git pull
+remote: Counting objects: 5, done.
+remote: Compressing objects: 100% (3/3), done.
+remote: Total 3 (delta 2), reused 0 (delta 0)
+Unpacking objects: 100% (3/3), done.
+From /Users/lars/projects/version-control-workshop/work/repo2
+   4245cb6..84f1112  master     -> origin/master
+Auto-merging README
+CONFLICT (content): Merge conflict in README
+Automatic merge failed; fix conflicts and then commit the result.
+```
+   
+To resolve the conflict manually:
+
+- Edit the conflicting files as necessary.
+
+To discard your changes (and accept the remote repository version)::
+
+- run ``git checkout --theirs README``
+
+To override the repository with your changes:
+
+- run ``git checkout --ours README``
+
+When you complete the above tasks:
+ 
+- add the files with ``git add``
+- commit the changes with ``git commit``.
+
+Once your local repository is in good working order, you can push the changes back to a remote repository.
+
 
 ## Merging and rebasing
 
