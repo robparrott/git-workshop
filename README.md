@@ -1,7 +1,11 @@
-git-workshop
-============
+## git-workshop
 
 Workshop on Git originally developed by Lars Kellogg-Stedman for Harvard SEAS, and expanded by Rob Parrott.
+
+Find the content here:
+
+- http://robparrott.github.io/git-workshop/
+
 
 ### Building
 
