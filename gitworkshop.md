@@ -345,6 +345,45 @@ When the file is not up-to-date or you just need to forcefully remove it, use th
 
     $ git rm -f annoying-file.txt
 
+## A Little Theory
+
+### The repository
+
+The actual repository in Git is contained is the root of the repository directory in `.git/`. It contains the entire history of the repository in a compact binary format, and allows you to very quickly change to any version of the repository, or to any branch. 
+
+When you clone or push a repository, it is this data that is transferred and manipulated. 
+
+Often with incremental updates, only differences are transferred, which makes git a very efficient transfer protocol/
+
+### The working copy
+
+All the files that you work with and edit are called the _working copy_, but are not the actual git repository. They can all deleted and you can still work with the repository. These files and their changes only become part of the repositiry after being added to the _index_ and them commited.
+
+### The Index
+
+Git is not really just like Subversion (or most other version control solutions). It uses an additional stage to allow you to do distrbuted version control: the _Index_.
+
+- The *index* is a staging area between your working copy and your local
+  repository.
+- ``git add`` adds files to the index
+- ``git commit`` commits files from the
+  index to the repository.
+
+In addition:
+
+- ``git diff`` is the difference between your working copy and the index.
+- ``git diff HEAD`` is the difference between your working copy and the
+  local repository.
+- ``git diff --cached`` is the difference between the index and the local
+  repository.
+
+
+Refer to this illustration to see how the index fits in:
+
+![git-transport.png](./images/git-transport.png)  
+(This image used with permission.)
+
+
 ## When things go wrong
 
 ### Redoing previous commit
@@ -468,13 +507,52 @@ And then merge it into the master branch::
 
 ## Interacting with remote repositories
 
+Because git is a distributed version control system, your local repository can have a relationship with more than one remote repositories. To do so, you need to learn how to specify and work with multiple remote repositories.
+
 ### Cloning a remote repository
+
+This is the first step in working with someone else's codebase.
+
+```
+git clone http://github.com/robparrott/git-workshop
+cd git-workshop
+```
+
+Remember that the repository itself is in `.git/` and that you have cloned the entire history of the repository as well as the current state.
+
+Use the `git remote` command to view the current set of remotes:
+
+```
+± |master ✗| → git remote -v
+origin  git@github.com:robparrott/git-workshop.git (fetch)
+origin  git@github.com:robparrott/git-workshop.git (push)
+```
+
+Note that by default there was a remote named `origin` created which points to the cloned remote repository.
 
 ### Add a remote repository
 
+Now you can add another repository beside the `origin` one. This could be your own copy on GitHub, when you don't have write access to the cloned repo.
+
+```
+git remote add mycopy git@github.com:robparrott/git-workshop2.git
+```
+
+You can have as many remotes as needed; you just need to keep track.
+
 ### Pushing your changes
 
+Now that you have two remotes set up, you need to specify which one when you pushg your changes. To push custom changes from the local repository to the "master" brnahc on your new repository:
 
+```
+git push mycopy master
+```
+
+In general the command `git push` is shorthand for `git push origin master`.
+
+##  GitHub
+
+GitHub has become the 
 ## Integrating w/ Subversion
 
 You can use git as your Subversion client.  This gives you many of the benefits of a DVCS while still interacting with a Subversion repository.
@@ -544,7 +622,7 @@ Unstaged changes after reset:
  M  git.rst
  M    git.rst
 Committed r39
-       M    git.rst
+ M    git.rst
 r39 = d1f884a3f945f6083541e28ab7a09ca8efc6343b (refs/remotes/trunk)
 No changes between current HEAD and refs/remotes/trunk
 Resetting to the latest refs/remotes/trunk
