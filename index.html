@@ -29,12 +29,13 @@
 <li><a href="#adding-changes">Adding changes</a></li>
 <li><a href="#committing-changes">Committing changes</a></li>
 <li><a href="#removing-files">Removing files</a></li>
+<li><a href="#github">GitHub</a></li>
+<li><a href="#interacting-with-remote-repositories">Interacting with remote repositories</a></li>
 <li><a href="#a-little-theory">A Little Theory</a></li>
 <li><a href="#when-things-go-wrong">When things go wrong</a></li>
 <li><a href="#tags">Tags</a></li>
 <li><a href="#branches">Branches</a></li>
-<li><a href="#interacting-with-remote-repositories">Interacting with remote repositories</a></li>
-<li><a href="#github">GitHub</a></li>
+<li><a href="#merging-and-rebasing">Merging and rebasing</a></li>
 <li><a href="#integrating-w-subversion">Integrating w/ Subversion</a></li>
 <li><a href="#about-this-document">About this document</a></li>
 </ul>
@@ -156,8 +157,6 @@ $ git config --global alias.ci commit
 
 <hr />
 
-<p>&gt;</p>
-
 <blockquote>
   <p><strong>Exercise:</strong> Install and configure git on your system.</p>
 </blockquote>
@@ -240,8 +239,6 @@ cd git-workshop
 </code></pre>
 
 <hr />
-
-<p>&gt;</p>
 
 <blockquote>
   <p><strong>Exercise:</strong> Create a simple repository from a directory, and add some files to it. Then clone that repository to another repository in a different directory on your system. Next clone the repository one more time, but as a "bare" repository using the <code>--bare</code> flag. Compare the contents of that directory to the contents of the <code>.git/</code> directory of the original repository. What's missing and what's the same?</p>
@@ -385,10 +382,8 @@ the actual file contents.</p>
 
 <hr />
 
-<p>&gt;</p>
-
 <blockquote>
-  <p><strong>Exercise:</strong> Clone this repository, and investigate it's files and history. When was this line (i.e. this text) written and by whom?</p>
+  <p><strong>Exercise:</strong> Clone this repository, and investigate it's files and history. Use <code>git status</code>, <code>git ls-files</code>,  <code>git log</code> or <code>git show</code>, and finally <code>git blame</code>. When was this line (i.e. this text) written and by whom?</p>
 </blockquote>
 
 <hr />
@@ -442,6 +437,75 @@ the changes we made in the previous step:</p>
 <pre><code>$ git rm -f annoying-file.txt
 </code></pre>
 
+<h2 id="github">GitHub</h2>
+
+<p><a href="http://github.com">GitHub</a> has emerged as the place to be with open source code. It provides an incredible toolset to collaborate and work with source code, including features such as </p>
+
+<ul>
+<li>Distributed coding and collaboration via "forking" and "pull requests"</li>
+<li>Source code browser and editor</li>
+<li>Easy diff analysis</li>
+<li>visualization of code history and networks</li>
+<li>Automation through "web-hooks" includinf automated testing and notifications</li>
+</ul>
+
+<p>One of the most useful features is the ability to fork (i.e. make a complete copy) of any project's code into a repository of your own, then </p>
+
+<p>Login here:</p>
+
+<ul>
+<li>http://github.com/</li>
+</ul>
+
+<hr />
+
+<blockquote>
+  <p><strong>Exercise:</strong> Create a brand new repository in GitHub that includes a README file. Using the GUI create an additional file in the repo with minimal contents. Once created, clone the repo locally. Make changes locally, including adding a new file, editing a file, and removing a file. Capture these into the index, commit, and then push to your GitHub repository. Confirm the changes are in place on GitHub.</p>
+</blockquote>
+
+<hr />
+
+<h2 id="interacting-with-remote-repositories">Interacting with remote repositories</h2>
+
+<p>Because git is a distributed version control system, your local repository can have a relationship with more than one remote repositories. To do so, you need to learn how to specify and work with multiple remote repositories.</p>
+
+<h3 id="cloning-a-remote-repository">Cloning a remote repository</h3>
+
+<p>This is the first step in working with someone else's codebase.</p>
+
+<pre><code>git clone http://github.com/robparrott/git-workshop
+cd git-workshop
+</code></pre>
+
+<p>Remember that the repository itself is in <code>.git/</code> and that you have cloned the entire history of the repository as well as the current state.</p>
+
+<p>Use the <code>git remote</code> command to view the current set of remotes:</p>
+
+<pre><code>git remote -v
+origin  git@github.com:robparrott/git-workshop.git (fetch)
+origin  git@github.com:robparrott/git-workshop.git (push)
+</code></pre>
+
+<p>Note that by default there was a remote named <code>origin</code> created which points to the cloned remote repository.</p>
+
+<h3 id="add-a-remote-repository">Add a remote repository</h3>
+
+<p>Now you can add another repository beside the <code>origin</code> one. This could be your own copy on GitHub, when you don't have write access to the cloned repo.</p>
+
+<pre><code>git remote add mycopy git@github.com:robparrott/git-workshop2.git
+</code></pre>
+
+<p>You can have as many remotes as needed; you just need to keep track.</p>
+
+<h3 id="pushing-your-changes">Pushing your changes</h3>
+
+<p>Now that you have two remotes set up, you need to specify which one when you pushg your changes. To push custom changes from the local repository to the "master" brnahc on your new repository:</p>
+
+<pre><code>git push mycopy master
+</code></pre>
+
+<p>In general the command <code>git push</code> is shorthand for <code>git push origin master</code>.</p>
+
 <h2 id="a-little-theory">A Little Theory</h2>
 
 <h3 id="the-repository">The repository</h3>
@@ -482,6 +546,14 @@ repository.</li>
 
 <p><img src="./images/git-transport.png" alt="git-transport.png" /> <br />
 (This image used with permission.)</p>
+
+<hr />
+
+<blockquote>
+  <p><strong>Exercise:</strong> Fork on GitHub this repository into your own, then clone that locally. Setup a new remote named "upstream" that tracks the original repository, keeping your copy under the name "origin". Make a trivial change to this repository, then push that change back to your copy or "fork" on GitHub. Once the change is pushed, use the GitHub GUI to create a "Pull Request" (PR) against the original repository. </p>
+</blockquote>
+
+<hr />
 
 <h2 id="when-things-go-wrong">When things go wrong</h2>
 
@@ -598,52 +670,7 @@ to it:</p>
       1 files changed, 2 insertions(+), 0 deletions(-)
 </code></pre>
 
-<h3 id="merging-and-rebasing">Merging and rebasing</h3>
-
-<h2 id="interacting-with-remote-repositories">Interacting with remote repositories</h2>
-
-<p>Because git is a distributed version control system, your local repository can have a relationship with more than one remote repositories. To do so, you need to learn how to specify and work with multiple remote repositories.</p>
-
-<h3 id="cloning-a-remote-repository">Cloning a remote repository</h3>
-
-<p>This is the first step in working with someone else's codebase.</p>
-
-<pre><code>git clone http://github.com/robparrott/git-workshop
-cd git-workshop
-</code></pre>
-
-<p>Remember that the repository itself is in <code>.git/</code> and that you have cloned the entire history of the repository as well as the current state.</p>
-
-<p>Use the <code>git remote</code> command to view the current set of remotes:</p>
-
-<pre><code>git remote -v
-origin  git@github.com:robparrott/git-workshop.git (fetch)
-origin  git@github.com:robparrott/git-workshop.git (push)
-</code></pre>
-
-<p>Note that by default there was a remote named <code>origin</code> created which points to the cloned remote repository.</p>
-
-<h3 id="add-a-remote-repository">Add a remote repository</h3>
-
-<p>Now you can add another repository beside the <code>origin</code> one. This could be your own copy on GitHub, when you don't have write access to the cloned repo.</p>
-
-<pre><code>git remote add mycopy git@github.com:robparrott/git-workshop2.git
-</code></pre>
-
-<p>You can have as many remotes as needed; you just need to keep track.</p>
-
-<h3 id="pushing-your-changes">Pushing your changes</h3>
-
-<p>Now that you have two remotes set up, you need to specify which one when you pushg your changes. To push custom changes from the local repository to the "master" brnahc on your new repository:</p>
-
-<pre><code>git push mycopy master
-</code></pre>
-
-<p>In general the command <code>git push</code> is shorthand for <code>git push origin master</code>.</p>
-
-<h2 id="github">GitHub</h2>
-
-<p>GitHub has become the </p>
+<h2 id="merging-and-rebasing">Merging and rebasing</h2>
 
 <h2 id="integrating-w-subversion">Integrating w/ Subversion</h2>
 
