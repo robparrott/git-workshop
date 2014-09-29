@@ -106,7 +106,6 @@ Start with these:
 Otherwise you will go insane during the rest of this workshop.
 
 ----
->
 > **Exercise:** Install and configure git on your system.
 >
 
@@ -183,7 +182,6 @@ cd git-workshop
 ```
 
 ----
->
 > **Exercise:** Create a simple repository from a directory, and add some files to it. Then clone that repository to another repository in a different directory on your system. Next clone the repository one more time, but as a "bare" repository using the `--bare` flag. Compare the contents of that directory to the contents of the `.git/` directory of the original repository. What's missing and what's the same?
 >
 
@@ -317,8 +315,7 @@ This is followed by the committer name, date, and time, and finally by
 the actual file contents.
 
 ----
->
-> **Exercise:** Clone this repository, and investigate it's files and history. When was this line (i.e. this text) written and by whom?
+> **Exercise:** Clone this repository, and investigate it's files and history. Use `git status`, `git ls-files`,  `git log` or `git show`, and finally `git blame`. When was this line (i.e. this text) written and by whom?
 >
 
 ----
@@ -365,6 +362,28 @@ Use the `rm` command:
 When the file is not up-to-date or you just need to forcefully remove it, use the `-f` forse option
 
     $ git rm -f annoying-file.txt
+
+## GitHub
+
+[GitHub](http://github.com) has emerged as the place to be with open source code. It provides an incredible toolset to collaborate and work with source code, including features such as 
+
+- Distributed coding and collaboration via "forking" and "pull requests"
+- Source code browser and editor
+- Easy diff analysis
+- visualization of code history and networks
+- Automation through "web-hooks" includinf automated testing and notifications
+
+One of the most useful features is the ability to fork (i.e. make a complete copy) of any project's code into a repository of your own, then 
+
+Login here:
+
+- http://github.com/
+
+----
+> **Exercise:** Create a brand new repository in GitHub that includes a README file. Using the GUI create an additional file in the repo with minimal contents. Once created, clone the repo locally. Make changes locally, including adding a new file, editing a file, and removing a file. Capture these into the index, commit, and then push to your GitHub repository. Confirm the changes are in place on GitHub.
+>
+
+----
 
 ## A Little Theory
 
