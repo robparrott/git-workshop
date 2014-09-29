@@ -111,6 +111,21 @@ Otherwise you will go insane during the rest of this workshop.
 
 ----
 
+## Getting help
+
+Most commands have built-in documentation you can access with the
+  ``--help`` option::
+
+```
+git init --help
+```
+
+- Also available via ``man``, e.g::
+
+```
+man git-init
+```
+
 ## Creating a repository
 
 A *repository* is what contains the change history for your project.
@@ -220,6 +235,7 @@ add this file to the repository in the next section.
 ### git ls-files
 
 To get a listing of all files in the repository, use `ls-files`
+
 ```
 git ls-files
 ```
@@ -315,12 +331,14 @@ This is followed by the committer name, date, and time, and finally by
 the actual file contents.
 
 ----
-> **Exercise:** Clone this repository, and investigate it's files and history. Use `git status`, `git ls-files`,  `git log` or `git show`, and finally `git blame`. When was this line (i.e. this text) written and by whom?
+> **Exercise:** Clone this repository, and investigate it's files and history. Use `git status`, `git ls-files`,  `git log` or `git show`, and finally `git blame`. Change a file, and look at the change with `git diff`. When was this line (i.e. this text) written and by whom?
 >
 
 ----
 
-## Adding changes
+## Making changes
+
+### Adding Changes
 
 You add changes to your repository with the `add` command.  Create a
 file called `newfile.txt`:
@@ -344,16 +362,37 @@ And now run `git status`:
 This shows that the next time we run `commit`, this file will be added
 to the repository. 
 
-## Committing changes
+### Committing changes
 
 The `commit` command records changes in your repository.  Let's commit
 the changes we made in the previous step:
 
-    $ git commit -m 'Added a new file.'
-     1 files changed, 1 insertions(+), 0 deletions(-)
-     create mode 100644 newfile.txt
+```
+$ git commit -m 'Added a new file.'
+1 files changed, 1 insertions(+), 0 deletions(-)
+create mode 100644 newfile.txt
+```
 
-## Removing files
+You can skip the _add_ step by referencing the file to commit:
+
+```
+git commit path/to/modified/file
+```
+
+or commit all non-new files at once:
+
+```
+git commit -a
+```
+
+### Moving files
+
+Use the `mv` command to relocate or rename files:
+
+    $ git mv newfile.txt newfile2.txt
+
+
+### Removing files
 
 Use the `rm` command:
 
@@ -363,43 +402,28 @@ When the file is not up-to-date or you just need to forcefully remove it, use th
 
     $ git rm -f annoying-file.txt
 
-## GitHub
 
-[GitHub](http://github.com) has emerged as the place to be with open source code. It provides an incredible toolset to collaborate and work with source code, including features such as 
-
-- Distributed coding and collaboration via "forking" and "pull requests"
-- Source code browser and editor
-- Easy diff analysis
-- visualization of code history and networks
-- Automation through "web-hooks" includinf automated testing and notifications
-
-One of the most useful features is the ability to fork (i.e. make a complete copy) of any project's code into a repository of your own, then 
-
-Login here:
-
-- http://github.com/
-
-----
-> **Exercise:** Create a brand new repository in GitHub that includes a README file. Using the GUI create an additional file in the repo with minimal contents. Once created, clone the repo locally. Make changes locally, including adding a new file, editing a file, and removing a file. Capture these into the index, commit, and then push to your GitHub repository. Confirm the changes are in place on GitHub.
->
-
-----
-
-
-## Interacting with remote repositories
-
-Because git is a distributed version control system, your local repository can have a relationship with more than one remote repositories. To do so, you need to learn how to specify and work with multiple remote repositories.
+## Working with Remote Repositories
 
 ### Cloning a remote repository
 
-This is the first step in working with someone else's codebase.
+Use the ``git clone`` command to check out a working copy of a remote
+repository:
 
 ```
 git clone http://github.com/robparrott/git-workshop
 cd git-workshop
 ```
 
-Remember that the repository itself is in `.git/` and that you have cloned the entire history of the repository as well as the current state.
+This is the first step in working with someone else's codebase.
+
+``git clone`` will clone the remote repository to a new directory in your current directory named after the repository, unless you explicitly provide a name with the *DIRECTORY* argument.
+
+This is analogous to Subversion's ``checkout`` operation.
+
+You can only clone the top-level repository; unlike Subversion, git does not allow you to clone individual subtrees.
+
+The repository itself is in `.git/` and that you have cloned the entire history of the repository as well as the current state.
 
 Use the `git remote` command to view the current set of remotes:
 
@@ -421,15 +445,84 @@ git remote add mycopy git@github.com:robparrott/git-workshop2.git
 
 You can have as many remotes as needed; you just need to keep track.
 
-### Pushing your changes
+### Updating your working copy
 
-Now that you have two remotes set up, you need to specify which one when you pushg your changes. To push custom changes from the local repository to the "master" brnahc on your new repository:
+Use ``git pull`` to update your local repository from the remote repository and merge changes into your working copy::
 
 ```
+git pull [REPOSITORY [REFSPEC]]
+```
+
+* http://www.kernel.org/pub/software/scm/git/docs/v1.6.6.2/git-pull.html
+
+``git pull`` by itself will pull changes from the remote repository defined by the ``branch.master.remote`` config option (which will typically be the repository from which you originally cloned your working copy).  If there are multiple remote repositories associated with your working copy, you can specify a repository (and branch) on the command line, e.g, to pull changes from the branch *master* at a remote named *origin*:
+
+```
+$ git pull origin master
+```
+
+### Pushing changes
+
+Use ``git push`` to send your committed changes to a remote repository::
+
+```
+git push [REPOSITORY [REFSPEC]]
+
+i.e.
 git push mycopy master
+
 ```
 
-In general the command `git push` is shorthand for `git push origin master`.
+* http://www.kernel.org/pub/software/scm/git/docs/v1.6.6.2/git-push.html
+
+``git push`` by itself will push your changes to the remote repository
+defined by the ``branch.master.remote`` config option (which will
+typically be the repository from which you originally cloned your
+working copy).  If there are multiple remote repositories associated
+with your working copy, you can specify a repository (and branch) on the
+command line, e.g, to push your changes to branch *master* at a remote
+named *origin*:
+
+```
+$ git push origin master
+```
+
+If you attempt to push to a repository that is newer than your working
+copy you will see an error similar to the following:
+
+```
+$ git push
+To dottiness.seas.harvard.edu:repos/myproject
+! [rejected]        master -> master (non-fast forward)
+error: failed to push some refs to 'dottiness.seas.harvard.edu:repos/myproject'
+```
+
+To fix this, run ``git pull`` and deal with any conflicts.
+
+
+## GitHub
+
+[GitHub](http://github.com) has emerged as the place to be with open source code. It provides an incredible toolset to collaborate and work with source code, including features such as 
+
+- Distributed coding and collaboration via "forking" and "pull requests"
+- Source code browser and editor
+- Easy diff analysis
+- visualization of code history and networks
+- Automation through "web-hooks" includinf automated testing and notifications
+
+One of the most useful features is the ability to fork (i.e. make a complete copy) of any project's code into a repository of your own, then 
+
+Login here:
+
+- [http://github.com/](http://github.com/)
+
+----
+> **Exercise:** Create a brand new repository in GitHub that includes a README file. Using the GUI create an additional file in the repo with minimal contents. Once created, clone the repo locally. Make changes locally, including adding a new file, editing a file, and removing a file. Capture these into the index, commit, and then push to your GitHub repository. Confirm the changes are in place on GitHub.
+>
+
+----
+
+
 
 ## A Little Theory
 
@@ -502,10 +595,60 @@ the changes from the previuos commit and your most recent changes.
 The `reset` command will **discard history** from your project and
 reset your repository to a prior state. 
 
+Use the ``git reset`` command to "undo" an add operation::
+
+```
+git reset HEAD
+```
+
+This resets the index but leaves your working directory untouched. You
+can also use `git reset` to revert to a previous commit, using the hash or a tag name; read the documentation for more information.
+
 ### Revert
 
 The `revert` command will generate a new commit that reverses the
 changes caused by a previous commit.
+
+## Conflicts
+
+A conflict occurrs when two people make overlapping changes.
+
+- Detected when you attempt to update your working copy via ``git pull``.
+- You may discard your changes, discard the repository changes, or attempt to correct things manually.
+
+If you attempt to pull in changes that conflict with your working tree, you will see an error similar to the following:
+
+```
+$ git pull
+remote: Counting objects: 5, done.
+remote: Compressing objects: 100% (3/3), done.
+remote: Total 3 (delta 2), reused 0 (delta 0)
+Unpacking objects: 100% (3/3), done.
+From /Users/lars/projects/version-control-workshop/work/repo2
+   4245cb6..84f1112  master     -> origin/master
+Auto-merging README
+CONFLICT (content): Merge conflict in README
+Automatic merge failed; fix conflicts and then commit the result.
+```
+   
+To resolve the conflict manually:
+
+- Edit the conflicting files as necessary.
+
+To discard your changes (and accept the remote repository version)::
+
+- run ``git checkout --theirs README``
+
+To override the repository with your changes:
+
+- run ``git checkout --ours README``
+
+When you complete the above tasks:
+ 
+- add the files with ``git add``
+- commit the changes with ``git commit``.
+
+Once your local repository is in good working order, you can push the changes back to a remote repository.
 
 ## Tags
 
@@ -570,11 +713,11 @@ git checkout -b BRANCHNAME [START]
 ```
 
 For example, you want to enhance your code with some awesome
-experimental code.  You create a new *seas-workshop-dev* branch and switch
+experimental code.  You create a new *workshop* branch and switch
 to it:
 
 ```
-$ git checkout -b seas-workshop-dev
+$ git checkout -b workshop
 ```
 
 You make some changes, and when things are working you commit your branch:
@@ -594,6 +737,37 @@ And then merge it into the master branch::
       1 files changed, 2 insertions(+), 0 deletions(-)
 ```
  
+### Pushing branches
+
+When you create a local branch and you want to push that branch to a remote repository, you need to specify the name of the remote branch to push to, and usually create it beforehand. This is done using the `-u` flag:
+
+```
+git push origin -u workshop
+```
+
+This should create a new branch remotyely and push this branch to it. An entry in your local git config will be created to remember this mapping.
+
+### Deleting branches
+
+To delete a local branch, use the `-D` option:
+```
+git branch -D workshop
+```
+
+If you want to remove a remote branch, you need to push to the branch specifying deletion. Newer versions of git use the `--delete` option
+```
+git push origin --delete workshop
+```
+while older version use the syntax
+```
+git push origin :workshop
+```
+
+----
+> **Exercise:** Using a repository from a previous exercise, tag your current version as a new tag. Next create a local branch and checkout that branch. Make changes on that branch, and commit them locally. Next push those changes to the remote. Confirm that works, then checkout your local master, mefrge the changes from the local branch, and push the master. Once that's done, delete both the local and remote branches.
+>
+
+----
 
 ## Merging and rebasing
 
