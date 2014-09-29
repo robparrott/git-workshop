@@ -35,7 +35,7 @@ collection of open source software for OS X, and then running:</p>
 <p>This will give you an environment largely similar to that available on
 Linux and OS X.</p>
 
-<h2 id="initial-configuration">Initial configuration</h2>
+<h2 id="initial-configuration">Initial Configuration</h2>
 
 <p>Git will look for configuration information inside the per-repository
 <code>.git/config</code> file and in the global <code>$HOME/.gitconfig</code>.  The <code>git config</code>
@@ -117,7 +117,7 @@ $ git config --global alias.ci commit
 
 <hr />
 
-<h2 id="getting-help">Getting help</h2>
+<h2 id="getting-help">Getting Help</h2>
 
 <p>Most commands have built-in documentation you can access with the
   <code>--help</code> option::</p>
@@ -132,7 +132,7 @@ $ git config --global alias.ci commit
 <pre><code>man git-init
 </code></pre>
 
-<h2 id="creating-a-repository">Creating a repository</h2>
+<h2 id="creating-a-repository">Creating a Repository</h2>
 
 <p>A <em>repository</em> is what contains the change history for your project.</p>
 
@@ -215,9 +215,9 @@ cd git-workshop
 
 <hr />
 
-<h2 id="whats-here-whats-changed">What's here? What's changed?</h2>
+<h2 id="whats-here-whats-changed">What's Here? What's Changed?</h2>
 
-<h3 id="git-status">git status</h3>
+<h3 id="git-status"><code>git status</code></h3>
 
 <p>The <code>git status</code> command displays information about the state of files
 in your working directory. If you were to run it inside the <code>sample1</code>
@@ -248,14 +248,14 @@ nothing added to commit but untracked files present (use "git add" to track)
 that git knows nothing about ("untracked").  We will look at how to
 add this file to the repository in the next section.</p>
 
-<h3 id="git-ls-files">git ls-files</h3>
+<h3 id="git-ls-files"><code>git ls-files</code></h3>
 
 <p>To get a listing of all files in the repository, use <code>ls-files</code></p>
 
 <pre><code>git ls-files
 </code></pre>
 
-<h3 id="git-diff">git diff</h3>
+<h3 id="git-diff"><code>git diff</code></h3>
 
 <p>The <code>diff</code> command shows the changes between different versions of
 your files.  Without any additional parameters, it will show the
@@ -310,7 +310,7 @@ modified) lines.</p>
 <pre><code>git diff &lt;commit1&gt; &lt;commit2&gt;
 </code></pre>
 
-<h3 id="git-log">git log</h3>
+<h3 id="git-log"><code>git log</code></h3>
 
 <p>Find out the commits to the repo, and their hash values by examining the log</p>
 
@@ -319,7 +319,7 @@ modified) lines.</p>
 
 <p>This shows the commit message and hash values.</p>
 
-<h3 id="git-show">git show</h3>
+<h3 id="git-show"><code>git show</code></h3>
 
 <p>If you need more information, use <code>show</code></p>
 
@@ -328,7 +328,7 @@ modified) lines.</p>
 
 <p>which shows not only logs, but also the changes themselves. Can be quite long.</p>
 
-<h3 id="git-blame">git blame</h3>
+<h3 id="git-blame"><code>git blame</code></h3>
 
 <p>The <code>blame</code> command shows who is responsible for each line in a file.
 For example, running <code>git blame</code> on the file <code>hello.py</code> yields:</p>
@@ -357,7 +357,7 @@ the actual file contents.</p>
 
 <hr />
 
-<h2 id="making-changes">Making changes</h2>
+<h2 id="making-changes">Making Changes</h2>
 
 <h3 id="adding-changes">Adding Changes</h3>
 
@@ -707,15 +707,16 @@ to it:</p>
 
 <hr />
 
-<h2 id="github-workflow">GitHub Workflow</h2>
+<h2 id="exercise-github-workflow">Exercise: GitHub Workflow</h2>
 
-<p>This extended exercise deomstrates using GitHub to do distributed development.</p>
-
-<p>Git + GitHub makes code review very easy. Instead of pushing changes to master, create a new branch, then push that branch to a remote remote branch of the same name.</p>
-
-<p>Then in GitHub, create a "Pull Request." Ask a collaborator to review that Pull Request. If you are disclined ad follow this simpe process for every changeset, you get code review for free. </p>
-
-<p>To start, create a local repository and populate it with some content:</p>
+<blockquote>
+  <p>This extended exercise demonstrates using GitHub to do distributed development.</p>
+  
+  <p>Git + GitHub makes code review very easy. Instead of pushing changes to master, create a new branch, then push that branch to a remote remote branch of the same name.</p>
+  
+  <p>Then in GitHub, create a "Pull Request." Ask a collaborator to review that Pull Request. If you are disclined ad follow this simpe process for every changeset, you get code review for free. </p>
+  
+  <p>To start, create a local repository and populate it with some content:</p>
 
 <pre><code>$ mkdir tutorial_code
 $ cd tutorial_code
@@ -737,8 +738,8 @@ $ git commit -m "my first checkin"
 $ git diff
 $ git commit -m "more changes"
 </code></pre>
-
-<p>Now that you have a basic repo, we want push it to GitHub. First, we'll need to create a repository in GitHub, and the following the directions, setup the remote properly. When done, push it.</p>
+  
+  <p>Now that you have a basic repo, we want push it to GitHub. First, we'll need to create a repository in GitHub, and the following the directions, setup the remote properly. When done, push it.</p>
 
 <pre><code># create a repository in GitHub or 
 #  elsewhere, then setup a "remote"
@@ -747,10 +748,10 @@ $ git remote add origin [url]
 # Now, let's push those changes remotely
 $ git push origin master
 </code></pre>
-
-<h3 id="branch-and-merge">Branch and Merge</h3>
-
-<p>Now let's do some experimental work on a different branch:</p>
+  
+  <h3 id="branch-and-merge">Branch and Merge</h3>
+  
+  <p>Now let's do some experimental work on a different branch:</p>
 
 <pre><code># I want to make some more changes, so
 #   create a branch track them
@@ -772,16 +773,17 @@ $ git commit -m "my new feature"
 #  on the remote server
 $ git push origin -u my_new_feature_branch
 </code></pre>
+  
+  <p>Once the branch is pushed, go to GitHub and create a Pull Request by browsing to the branch and clicking a button.</p>
+  
+  <p>Collaborators on the repo will need notified by email, and can view changes, and merge if they approve.</p>
+  
+  <h3 id="fork-and-merge">Fork and Merge</h3>
+  
+  <p>Now do the same, but instead of branching, use GitHub forking to make the changes. Have someone else fork your repo in GitHub, and they will make changes to their copy of your repo. Once their changes are checked back in, have them create a Pull Request, and merge.</p>
+</blockquote>
 
-<p>Once the branch is pushed, go to GitHub and create a Pull Request by browsing to the branch and clicking a button.</p>
-
-<p>Collaborators on the repo will need notified by email, and can view changes, and merge if they approve.</p>
-
-<h3 id="fork-and-merge">Fork and Merge</h3>
-
-<p>Now do the same, but instead of branching, use GitHub forking to make the changes. Have someone else fork your repo in GitHub, and they will make changes to their copy of your repo. Once their changes are checked back in, have them create a Pull Request, and merge.</p>
-
-<h2 id="when-things-go-wrong">When things go wrong</h2>
+<h2 id="when-things-go-wrong">When Things Go Wrong</h2>
 
 <h3 id="redoing-previous-commit">Redoing previous commit</h3>
 
@@ -873,7 +875,7 @@ Automatic merge failed; fix conflicts and then commit the result.
 
 <p>Once your local repository is in good working order, you can push the changes back to a remote repository.</p>
 
-<h2 id="merging-and-rebasing">Merging and rebasing</h2>
+<h2 id="merging-and-rebasing">Merging and Rebasing</h2>
 
 <p>(TBD)</p>
 
