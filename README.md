@@ -2,6 +2,8 @@
 
 Steve Martino's edits again.
 
+Changes after creating Branch
+
 Workshop on Git originally developed by Lars Kellogg-Stedman for Harvard SEAS, and expanded by Rob Parrott.
 
 Find the content here:
