@@ -172,7 +172,7 @@ necessary to create the directory first:
 Another way to create a git repository is to copy -- or *clone* it --
 from somewhere else using the `git clone` command.  For example:
 
-    $ git clone git://github.com/robparrott/git-workshop-sample1.git
+    $ git clone git://github.com/robparrott/git-workshop.git
 
 Which should result in output along the lines of:
 
