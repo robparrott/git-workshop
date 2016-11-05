@@ -1,3 +1,5 @@
+[TOC]
+
 ## git-workshop
 
 Workshop on Git originally developed by Lars Kellogg-Stedman for Harvard SEAS, and expanded by Rob Parrott.
